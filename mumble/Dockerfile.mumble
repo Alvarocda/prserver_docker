@@ -1,0 +1,46 @@
+FROM ubuntu:12.04
+
+RUN useradd -m prmurmur
+
+
+WORKDIR /home/prmurmur/PRMurmur
+
+COPY --chown=prmurmur:prmurmur PRMurmur .
+COPY --chown=prmurmur:prmurmur entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+RUN chmod +x createchannel.sh
+RUN chmod +x initialsetup.sh
+RUN chmod +x startmumo.sh
+RUN chmod +x prmurmurd.x64
+
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
+RUN apt-get update && apt-get install -y \
+        mumble-server \
+        python \
+        libssl1.0.0 \
+        python-zeroc-ice \
+        libprotobuf7 \
+        libcap2 \
+        libiceutil34 \
+        libzeroc-ice34 \
+        libqt4-dbus \
+        libqt4-sql \
+        libqt4-sql-sqlite \
+        libqt4-network \
+        libicu48 \
+        nano \
+        htop \
+        && \
+        apt-get -y upgrade && \
+        apt-get clean autoclean && \
+        apt-get autoremove -y && \
+        rm -rf /var/lib/{apt,dpkg,cache,log}/ 
+USER prmurmur
+
+EXPOSE 64740 64740/udp 64738 64738/udp
+
+ENTRYPOINT [ "./entrypoint.sh" ]
