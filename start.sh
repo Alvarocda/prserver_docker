@@ -13,19 +13,19 @@ yes '' | ./prserverupdater-linux64
 
 cd /opt/pr/proxy
 python3 main.py &
-cd /opt/pr/prbf2_1.7.4.0_server/mods/pr/bin/PRMurmur/
-chmod +x prmurmurd.x64
-./prmurmurd.x64 &
+#cd /opt/pr/prbf2_1.7.4.0_server/mods/pr/bin/PRMurmur/
+#chmod +x prmurmurd.x64
+#./prmurmurd.x64 &
 
-sleep 15
-chmod +x initialsetup.sh
-./initialsetup.sh &
-sleep 10
-chmod +x createchannel.sh
-./createchannel.sh &
-sleep 10
-chmod +x startmumo.sh
-./startmumo.sh &
+#sleep 15
+#chmod +x initialsetup.sh
+#./initialsetup.sh &
+#sleep 10
+#chmod +x createchannel.sh
+#./createchannel.sh &
+#sleep 10
+#chmod +x startmumo.sh
+#./startmumo.sh &
 
 cd /opt/pr/prbf2_1.7.4.0_server/
 chmod +x start_pr.sh
